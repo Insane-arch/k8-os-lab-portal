@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Kubernetes OS Lab Portal</title>
+	<meta name="description" content="A custom full stack Kubernetes project portal with Node.js, MySQL, persistence, and self-healing demonstration.">
+	<link rel="icon" type="image/svg+xml" href="favicon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="bg-blobs">
+		<span class="blob blob-1"></span>
+		<span class="blob blob-2"></span>
+		<span class="blob blob-3"></span>
+		<span class="grid-overlay"></span>
+	</div>
+
+	<header class="hero" id="top">
+		<nav class="navbar">
+			<a href="#top" class="brand">
+				<span class="brand-icon">⎈</span>
+				<div>
+					<h3>Kubernetes OS Lab Portal</h3>
+					<p>Distributed Operating Environment</p>
+				</div>
+			</a>
+
+			<div class="nav-links" id="navLinks">
+				<a href="#about">About</a>
+				<a href="#features">Features</a>
+				<a href="#architecture">Architecture</a>
+				<a href="#team">Team</a>
+				<a href="#messages">Messages</a>
+			</div>
+
+			<button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+		</nav>
+
+		<div class="hero-layout">
+			<div class="hero-left reveal">
+				<div class="eyebrow">
+					<span class="pulse-dot"></span>
+					Live Kubernetes Full Stack Deployment
+				</div>
+
+				<h1>
+					A modern Kubernetes project
+					<span>built like a real platform</span>
+				</h1>
+
+				<p class="hero-text">
+					This custom portal demonstrates pod scheduling, service networking,
+					load balancing, state persistence, and self-healing inside a multi-node
+					Kubernetes cluster using Node.js, MySQL, and Docker.
+				</p>
+
+				<div class="hero-actions">
+					<a class="btn btn-primary" href="#messages">Test Persistence</a>
+					<a class="btn btn-secondary" href="#about">Explore Project</a>
+				</div>
+
+				<div class="hero-stats">
+					<div class="stat-card reveal">
+						<h2 class="counter" data-target="3">0</h2>
+						<p>Cluster Nodes</p>
+					</div>
+					<div class="stat-card reveal">
+						<h2 class="counter" data-target="2">0</h2>
+						<p>App Replicas</p>
+					</div>
+					<div class="stat-card reveal">
+						<h2 class="counter" data-target="100">0</h2>
+						<p>% Persistent Data</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="hero-right reveal">
+				<div class="glass-card system-card floating-card">
+					<div class="card-top">
+						<div>
+							<p class="mini-label">Live System Status</p>
+							<h3>Cluster Health Monitor</h3>
+						</div>
+						<div class="status-pill" id="liveStatus">Checking...</div>
+					</div>
+
+					<div class="status-grid">
+						<div class="status-box">
+							<p>Application</p>
+							<h4>K8 OS Lab Portal</h4>
+						</div>
+						<div class="status-box">
+							<p>Backend</p>
+							<h4>Node.js + Express</h4>
+						</div>
+						<div class="status-box">
+							<p>Database</p>
+							<h4>MySQL + PVC</h4>
+						</div>
+						<div class="status-box">
+							<p>Environment</p>
+							<h4>Kubernetes Cluster</h4>
+						</div>
+					</div>
+
+					<div class="pod-box">
+						<div class="pod-box-head">
+							<span>Current Pod</span>
+							<strong id="podName">Loading...</strong>
+						</div>
+						<div class="health-bar">
+							<div class="health-fill" id="healthFill"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="glass-card mini-architecture reveal">
+					<h4>Traffic Flow</h4>
+					<div class="arch-line">
+						<span>Browser</span>
+						<i>→</i>
+						<span>NodePort / Ingress</span>
+						<i>→</i>
+						<span>Node.js App</span>
+						<i>→</i>
+						<span>MySQL</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<section class="section reveal" id="about">
+			<div class="section-heading">
+				<span class="section-tag">About the project</span>
+				<h2>Why this cluster exists</h2>
+				<p>
+					This portal was built as a serious Operating Systems Lab project to connect
+					theory with real container orchestration. It shows how a Kubernetes cluster
+					acts like a distributed operating environment managing processes, storage,
+					networking, and recovery across multiple machines.
+				</p>
+			</div>
+
+			<div class="about-grid">
+				<div class="feature-panel reveal">
+					<h3>Custom Full Stack App</h3>
+					<p>
+						A custom-built Node.js application with a modern frontend, real database
+						connectivity, and persistence testing instead of just a basic demo page.
+					</p>
+				</div>
+				<div class="feature-panel reveal">
+					<h3>Stateful Architecture</h3>
+					<p>
+						MySQL runs with persistent storage, which means saved messages remain available
+						even after pod deletion or recreation.
+					</p>
+				</div>
+				<div class="feature-panel reveal">
+					<h3>Operating System Concepts</h3>
+					<p>
+						Process management, scheduling, networking, access control, monitoring,
+						resource handling, and fault recovery are all visible in one project.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section reveal" id="features">
+			<div class="section-heading">
+				<span class="section-tag">Core capabilities</span>
+				<h2>What this deployment demonstrates</h2>
+			</div>
+
+			<div class="features-grid">
+				<div class="feature-card reveal">
+					<div class="feature-icon">⚙</div>
+					<h3>Pod Scheduling</h3>
+					<p>Kubernetes schedules workload pods on worker nodes based on the deployment rules and labels.</p>
+				</div>
+				<div class="feature-card reveal">
+					<div class="feature-icon">🛡</div>
+					<h3>RBAC Security</h3>
+					<p>Role-Based Access Control protects cluster visibility and dashboard usage with controlled permissions.</p>
+				</div>
+				<div class="feature-card reveal">
+					<div class="feature-icon">🗄</div>
+					<h3>Persistent Storage</h3>
+					<p>MySQL uses PersistentVolume and PersistentVolumeClaim so data survives restarts and recreations.</p>
+				</div>
+				<div class="feature-card reveal">
+					<div class="feature-icon">🌐</div>
+					<h3>Service Networking</h3>
+					<p>Internal service communication allows the application to reach the database through Kubernetes DNS.</p>
+				</div>
+				<div class="feature-card reveal">
+					<div class="feature-icon">📈</div>
+					<h3>Scalability</h3>
+					<p>The application runs with multiple replicas, making it easier to demonstrate availability and scaling.</p>
+				</div>
+				<div class="feature-card reveal">
+					<div class="feature-icon">♻</div>
+					<h3>Self-Healing</h3>
+					<p>If a pod is deleted, Kubernetes recreates it automatically to maintain the desired state.</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section reveal" id="architecture">
+			<div class="section-heading">
+				<span class="section-tag">Architecture</span>
+				<h2>High-level deployment flow</h2>
+			</div>
+
+			<div class="architecture-wrap">
+				<div class="arch-card reveal">
+					<h3>Control Plane</h3>
+					<p>Manages scheduling, orchestration, API, state, and cluster decisions.</p>
+				</div>
+				<div class="arch-arrow">→</div>
+				<div class="arch-card reveal">
+					<h3>Worker Nodes</h3>
+					<p>Run application containers, MySQL containers, and networking components.</p>
+				</div>
+				<div class="arch-arrow">→</div>
+				<div class="arch-card reveal">
+					<h3>Persistent Data</h3>
+					<p>Messages are stored in MySQL with persistent storage to survive failures.</p>
+				</div>
+			</div>
+
+			<div class="timeline reveal">
+				<div class="timeline-item">
+					<span>01</span>
+					<div>
+						<h4>Request hits the application</h4>
+						<p>User traffic reaches the service through NodePort or Ingress.</p>
+					</div>
+				</div>
+				<div class="timeline-item">
+					<span>02</span>
+					<div>
+						<h4>Backend processes the form</h4>
+						<p>The Node.js backend validates input and writes it to MySQL.</p>
+					</div>
+				</div>
+				<div class="timeline-item">
+					<span>03</span>
+					<div>
+						<h4>Data stays persistent</h4>
+						<p>Even after pod recreation, records remain because storage is preserved.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="section reveal dark-section" id="team">
+			<div class="section-heading light">
+				<span class="section-tag light-tag">Project team</span>
+				<h2>Group Members</h2>
+			</div>
+
+			<div class="team-grid">
+				<div class="team-card reveal"><strong>Muhammad Hamza Naseer</strong><span>247121</span></div>
+				<div class="team-card reveal"><strong>Sultan Majeed</strong><span>247187</span></div>
+				<div class="team-card reveal"><strong>Muhammad Arqam</strong><span>247107</span></div>
+				<div class="team-card reveal"><strong>Abdullah Warraich</strong><span>247338</span></div>
+				<div class="team-card reveal"><strong>Aryan Miran</strong><span>247117</span></div>
+				<div class="team-card reveal"><strong>Masroor Ahmed</strong><span>247158</span></div>
+				<div class="team-card reveal"><strong>Hamza Kaleem</strong><span>247151</span></div>
+			</div>
+		</section>
+
+		<section class="section reveal" id="messages">
+			<div class="section-heading">
+				<span class="section-tag">Persistence test</span>
+				<h2>Submit a message to the database</h2>
+				<p>
+					Use this form to insert data into MySQL. Later, when pods are deleted and recreated,
+					these messages should still remain available, proving persistence.
+				</p>
+			</div>
+
+			<div class="message-layout">
+				<div class="message-form-card reveal">
+					<form id="messageForm">
+						<div class="input-group">
+							<label for="name">Full Name</label>
+							<input type="text" id="name" placeholder="Enter your full name" required>
+						</div>
+
+						<div class="input-group">
+							<label for="email">Email Address</label>
+							<input type="email" id="email" placeholder="Enter your email" required>
+						</div>
+
+						<div class="input-group">
+							<label for="message">Message</label>
+							<textarea id="message" placeholder="Write your message for persistence testing..." required></textarea>
+						</div>
+
+						<button type="submit" class="btn btn-primary full-btn">
+							<span>Save Message</span>
+						</button>
+					</form>
+				</div>
+
+				<div class="saved-messages-card reveal">
+					<div class="saved-head">
+						<h3>Saved Messages</h3>
+						<button class="refresh-btn" id="refreshBtn" type="button">Refresh</button>
+					</div>
+					<div id="messageList" class="message-list"></div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<footer class="footer">
+		<p>Operating Systems Lab Project • Kubernetes Full Stack Deployment • Node.js • MySQL • Persistent Storage</p>
+	</footer>
+
+	<div class="toast" id="toast"></div>
+
+	<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: custom-mysql
+  namespace: custom-app-lab
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: custom-mysql
+  template:
+    metadata:
+      labels:
+        app: custom-mysql
+    spec:
+      nodeSelector:
+        custom-role: mysql
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        ports:
+        - containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: custom-mysql-secret
+              key: mysql-root-password
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: custom-mysql-secret
+              key: mysql-database
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql
+        resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "700m"
+            memory: "1Gi"
+      volumes:
+      - name: mysql-storage
+        persistentVolumeClaim:
+          claimName: custom-mysql-pvc
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: custom-app-lab
+spec:
+  selector:
+    app: custom-mysql
+  ports:
+  - port: 3306
+    targetPort: 3306
+  type: ClusterIP
