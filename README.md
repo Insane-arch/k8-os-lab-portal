@@ -27,6 +27,16 @@ A custom full-stack web application was deployed on Kubernetes using Node.js, Ex
 - NGINX Ingress Controller
 - Ubuntu Server 24.04.4 LTS
 
+## Group Members
+
+Muhammad Hamza Naseer | 247121
+Sultan Majeed | 247187
+Muhammad Arqam | 247107
+Abdullah Warraich | 247338
+Aryan Miran | 247117
+Masroor Ahmed | 247158
+Hamza Kaleem | 247151
+
 ## Cluster Nodes
 
 | Node | Role |
@@ -39,3 +49,5 @@ A custom full-stack web application was deployed on Kubernetes using Node.js, Ex
 
 ```text
 ghost1027/k8-os-lab-portal:v2
+
+
